@@ -2,10 +2,21 @@ spring:
   datasource:
     driver: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/testdb
-    username: testdb
-    password: testdb
+    username: ${TESTDB_USERNAME}
+    password: ${TESTDB_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create
     show-sql: true
+info:
+  app:
+    description: This is with on spring boot application
+    name: Auth Service
+    version: 1.0.0
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
