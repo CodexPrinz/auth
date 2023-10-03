@@ -2,8 +2,8 @@ spring:
   datasource:
     driver: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/testdb
-    username: testdb
-    password: testdb
+    username: ${TESTDB_USERNAME}
+    password: ${TESTDB_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
