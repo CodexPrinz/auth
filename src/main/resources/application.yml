@@ -9,3 +9,14 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+info:
+  app:
+    description: This is with on spring boot application
+    name: Auth Service
+    version: 1.0.0
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
