@@ -1,7 +1,9 @@
 package com.project.auth.controller;
 
 import com.project.auth.entity.User;
+import com.project.auth.service.ReportService;
 import com.project.auth.service.UserService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReportService reportService;
 
     @GetMapping("/user")
     public ResponseEntity<List<User>> getAllUser(){
@@ -43,5 +47,15 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/report/{reportFormat}")
+    public ResponseEntity<String> generateReport(@PathVariable String reportFormat){
+        try {
+            return new ResponseEntity<>(reportService.exportReport(reportFormat), HttpStatus.OK);
+        } catch (JRException e) {
+            //throw new RuntimeException(e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
+        }
     }
 }
